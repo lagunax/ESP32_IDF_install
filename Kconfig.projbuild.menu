@@ -1,0 +1,52 @@
+-menu-> menu "Arduino Configuration"
+-befor-> config ARDUINO_SELECTIVE_COMPILATION
+
+menu "SPI Display"
+choice SPIDISPLAY_DRIVER
+    bool "Default log level"
+    default SPIDISPLAY_DRIVER_NON
+    help
+        Specify driver for display.
+
+config SPIDISPLAY_DRIVER_1
+    bool ""
+config SPIDISPLAY_DRIVER_2
+    bool ""
+config SPIDISPLAY_DRIVER_3
+    bool ""
+config SPIDISPLAY_DRIVER_4
+    bool ""
+config SPIDISPLAY_DRIVER_5
+    bool ""
+config SPIDISPLAY_DRIVER_NON
+    bool "No driver selected"
+endchoice
+
+config SPIDISPLAY_ARDUHAL_LOG_DEFAULT_LEVEL
+    int
+    default 0 if ARDUHAL_LOG_DEFAULT_LEVEL_NONE
+    default 1 if ARDUHAL_LOG_DEFAULT_LEVEL_ERROR
+    default 2 if ARDUHAL_LOG_DEFAULT_LEVEL_WARN
+    default 3 if ARDUHAL_LOG_DEFAULT_LEVEL_INFO
+    default 4 if ARDUHAL_LOG_DEFAULT_LEVEL_DEBUG
+    default 5 if ARDUHAL_LOG_DEFAULT_LEVEL_VERBOSE
+
+config SPIDISPLAY_ARDUHAL_LOG_COLORS
+    bool "Use ANSI terminal colors in log output"
+    default "n"
+    help
+        Enable ANSI terminal color codes in bootloader output.
+        In order to view these, your terminal program must support ANSI color codes.
+
+config SPIDISPLAY_ARDUHAL_ESP_LOG
+    bool "Forward ESP_LOGx to Arduino log output"
+    default "n"
+    help
+        This option will redefine the ESP_LOGx macros to Arduino's log_x macros.
+        To enable for your application, add the follwing after your includes:
+        #ifdef ARDUINO_ARCH_ESP32
+        #include "esp32-hal-log.h"
+        #endif
+
+endmenu
+
