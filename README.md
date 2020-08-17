@@ -1,4 +1,4 @@
-# SPIDisplay
+# ESP32_IDF_install 
 
 Repo will be renamed soon.
 
